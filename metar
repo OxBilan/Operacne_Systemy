@@ -1,0 +1,23 @@
+#i/bin/bash
+
+if [ "$#" == 2 ]
+then
+
+DATE_ARG=$(echo $1 | tr '-' '/')
+DATE_ARG2=$(echo $DATE_ARG | { IFS=/ read d m y && echo "$m/$d/$y"; })
+DATE_ARG3=$(date -d $DATE_ARG2 +'%s')
+
+echo $DATE_ARG3
+
+Endtime=$(echo $DATE_ARG3+86400 | bc)
+
+Meno=$(echo $2 | tr [:lower:] [:upper:])
+echo $Meno
+
+URL='https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=csv&stationString='"$Meno"'&startTime='"$DATE_ARG3"'&endTime='"$Endtime"''
+
+curl -s "$URL" | tail -n +6 | sed 's/.*elevation_m//'
+
+else 
+	echo Ste zadali malo argumentov
+fi
