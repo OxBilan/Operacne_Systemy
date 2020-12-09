@@ -1,10 +1,10 @@
-#i/bin/bash
+#/bin/bash
 
 Name="Metar"
 cat <<THE_END
 set terminal wxt
 set xdata time
-set timeft "%H-%M"
+set timefmt "%H-%M"
 set xtics format "%H:%M"
 plot '-' using 1:2 with boxes
 THE_END
