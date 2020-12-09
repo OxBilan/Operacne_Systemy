@@ -1,4 +1,4 @@
-#i/bin/bash
+#!/bin/bash
 
 if [ "$#" == 2 ]
 then
@@ -27,7 +27,7 @@ YesSecond=$(echo $YesSec+86400 | bc)
 
 URL='https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=csv&stationString='"$Meno"'&startTime='"$YesSec"'&endTime='"$YesSecond"''
 
-curl -s "$URL" | tail -n +6 | sed 's/.*elevation_m//'
+curl -s "$URL" | tail -n +7
 
 else 
 	echo Ste zadali zly pocet argumentov
